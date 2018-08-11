@@ -17,17 +17,17 @@
         android:id="@+id/textViewId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Id:" />
 
     <TextView
         android:id="@+id/textViewEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Email:" />
 
     <TextView
         android:id="@+id/textViewLastLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="LastLogin:" />
 </LinearLayout>

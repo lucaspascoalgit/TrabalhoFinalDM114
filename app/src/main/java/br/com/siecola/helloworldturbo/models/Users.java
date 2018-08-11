@@ -8,7 +8,7 @@ public class Users implements Serializable {
     private long id;
     private String email;
     private String password;
-    private long gcmRegId;
+    private String gcmRegId;
     private Date lastLogin;
     private Date lastGCMRegister;
     private String role;
@@ -44,11 +44,11 @@ public class Users implements Serializable {
         this.password = password;
     }
 
-    public long getGcmRegId() {
+    public String getGcmRegId() {
         return gcmRegId;
     }
 
-    public void setGcmRegId(long gcmRegId) {
+    public void setGcmRegId(String gcmRegId) {
         this.gcmRegId = gcmRegId;
     }
 

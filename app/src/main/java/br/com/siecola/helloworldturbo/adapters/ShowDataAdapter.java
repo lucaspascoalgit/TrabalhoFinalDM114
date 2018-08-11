@@ -55,15 +55,15 @@ public class ShowDataAdapter extends BaseAdapter {
             textViewStatus.setText("Coloque seus dados e pressione logar");
 
         }if (resultado==1){
-            textViewStatus.setText("Logando");
+            textViewStatus.setText("Logando.....");
         }
         if (resultado==2){
             textViewStatus.setText("Login Sucesso");
 
-            textViewId.setText(String.valueOf(user.getId()));
-            textViewEmail.setText(user.getEmail());
+            textViewId.setText("Id: "+String.valueOf(user.getId()));
+            textViewEmail.setText("Email: "+ user.getEmail());
             //textViewLastLogin.setText(String.valueOf(user.getLastLogin()));
-            textViewLastLogin.setText("Sem valor");
+            textViewLastLogin.setText("LastLogin: Sem valor");
 
         }if (resultado==3){
             textViewStatus.setText("Erro Login");

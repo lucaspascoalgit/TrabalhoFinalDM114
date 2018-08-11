@@ -205,7 +205,8 @@ public class Fragment_login extends Fragment {
               //Dados de login
               editTextEmail.setText(sharedSettings.getString("dadosUsuario02",""));
               editTextPassword.setText(sharedSettings.getString("dadosUsuario03",""));
-
+              resultadoConsulta=2;
+              showData();
           }
 
       }
@@ -225,7 +226,7 @@ public class Fragment_login extends Fragment {
         editor.putString("dadosUsuario01", gson.toJson(this.compareUsers));
         editor.putString("dadosUsuario02", email);
         editor.putString("dadosUsuario03", password);
-        //editor.putString("dadosUsuario04", String.valueOf(this.compareUsers.getId()));
+        editor.putString("dadosUsuario04", String.valueOf(this.compareUsers.getId()));
 
         editor.commit();
     }
