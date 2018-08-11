@@ -2,15 +2,18 @@ package br.com.siecola.helloworldturbo.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +23,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.List;
 
 import br.com.siecola.helloworldturbo.R;
+import br.com.siecola.helloworldturbo.adapters.ShowDataAdapter;
 import br.com.siecola.helloworldturbo.models.Order;
 import br.com.siecola.helloworldturbo.models.Users;
 import br.com.siecola.helloworldturbo.webservice.WebServiceClient;
@@ -28,16 +32,19 @@ import br.com.siecola.helloworldturbo.webservice.WebServiceResponse;
 public class Fragment_login extends Fragment {
 
     //Declaração dos objetos da tela
-    private TextView textViewStatus;
-    private TextView textDadosCliente;
+    //private TextView textViewStatus;
+    //private TextView textDadosCliente;
     private EditText editTextEmail;
     private EditText editTextPassword;
     private Button buttonLogar;
+    private ListView listViewClient;
 
     String email;
     String password;
     String host;
+    int resultadoConsulta=0;
     Users compareUsers = new Users();
+    private List<Users> compareTest;
 
     //método para inflar o fragment
     @Override
@@ -50,11 +57,12 @@ public class Fragment_login extends Fragment {
         getActivity().setTitle("Tela Login");
 
         //instanciando os componentes de tela
-        textViewStatus = (TextView) rootView.findViewById(R.id.textViewStatus);
+        //textViewStatus = (TextView) rootView.findViewById(R.id.textViewStatus);
         editTextPassword = (EditText) rootView.findViewById(R.id.editTextPassword);
         editTextEmail = (EditText) rootView.findViewById(R.id.editTextEmail);
-        textDadosCliente = (TextView) rootView.findViewById((R.id.textDadosCliente));
+        //textDadosCliente = (TextView) rootView.findViewById((R.id.textDadosCliente));
         buttonLogar = (Button) rootView.findViewById(R.id.buttonLogar);
+        listViewClient = (ListView) rootView.findViewById(R.id.listViewClient);
 
 
         //Dados Salvos no SharedPreference
@@ -65,13 +73,18 @@ public class Fragment_login extends Fragment {
             Gson gson = new Gson();
             this.compareUsers = gson.fromJson(
                     strOrders0, Users.class);
+            resultadoConsulta = 1;//Dados do usuário disponível
+            showData();
+        }else{
+            resultadoConsulta = 0;//Consultar dados do Usuário;
+            showData();
         }
 
         //Botão para solicitar o login na aplicação
         buttonLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textViewStatus.setText("Verificando Dados");
+                //textViewStatus.setText("Verificando Dados");
 
                 email = editTextEmail.getText().toString();
                 password = editTextPassword.getText().toString();
@@ -79,7 +92,13 @@ public class Fragment_login extends Fragment {
                 String comparaPassword;
 
                 //metodo para solicitar dados do servidor
+                resultadoConsulta = 1;//Consultando
+                showData();
                 verificaLogin(email,password);
+
+                //while(resultadoConsulta == 0){
+                    //textViewStatus.setText("Consultando");
+                //}
 
                 //compara dados do servidor com dados digitados
                 comparaPassword = compareUsers.getPassword().toString();
@@ -89,19 +108,19 @@ public class Fragment_login extends Fragment {
 
                     if(comparaPassword.equals(password)&& comparaEmail.equals(email)){
 
-                        textViewStatus.setText("Logado");
-                        textDadosCliente.setText("Id:"+(String.valueOf(compareUsers.getId()))+
+                        //textViewStatus.setText("Logado");
+                      /*  textDadosCliente.setText("Id:"+(String.valueOf(compareUsers.getId()))+
                                 "\nEmail:"+compareUsers.getEmail()+
                                 "\nLastLogin:"+compareUsers.getLastLogin()
-                        );
+                        );*/
 
                     }else{
 
-                        textViewStatus.setText("Falha no Login");
-                        textDadosCliente.setText("Id:"+
+                        //textViewStatus.setText("Falha no Login");
+                       /* textDadosCliente.setText("Id:"+
                                 "\nEmail:"+
                                 "\nLastLogin:"
-                        );
+                        );*/
 
                     }
                 }
@@ -116,7 +135,7 @@ public class Fragment_login extends Fragment {
     public void verificaLogin(String email, String password){
 
         host="https://sales-provider.appspot.com/api/users/byemail?email="+email;
-
+        resultadoConsulta = 0;
         //***************************************************************************************
         //Metodo de solicitação e tratamento das informações do servidor
         new AsyncTask<Void, Void, WebServiceResponse>() {
@@ -137,12 +156,18 @@ public class Fragment_login extends Fragment {
                          compareUsers = gson.fromJson(
                                 webServiceResponse.getResultMessage(),
                                 Users.class);
+                          resultadoConsulta = 2;//Consulta OK
+                        showData();
 
                         //orderEvents.getOrdersFinished(orders);
                     } catch (Exception e) {
+                        resultadoConsulta = 4;//Erro OK
+                        showData();
                         //orderEvents.getOrdersFailed(webServiceResponse);
                     }
                 } else {
+                    resultadoConsulta = 3;//Não encontrado OK
+                    showData();
                     //orderEvents.getOrdersFailed(webServiceResponse);
                 }
             }
@@ -151,7 +176,14 @@ public class Fragment_login extends Fragment {
 
         //Toast.makeText(getActivity(),resposta.getResponseCode(),Toast.LENGTH_LONG).show();
 
-        }
+    }
+
+    public void showData(){
+        //compareTest=compareUsers;
+        ShowDataAdapter showDataAdapter = new ShowDataAdapter(getActivity(),compareUsers,resultadoConsulta);
+        listViewClient.setAdapter(showDataAdapter);
+        return;
+    }
 
       @Override
       public void onStart(){
@@ -166,10 +198,10 @@ public class Fragment_login extends Fragment {
               Gson gson = new Gson();
               this.compareUsers = gson.fromJson(
                       strOrders, Users.class);
-              textDadosCliente.setText("Id:"+(String.valueOf(compareUsers.getId()))+
+             /* textDadosCliente.setText("Id:"+(String.valueOf(compareUsers.getId()))+
                       "\nEmail:"+compareUsers.getEmail()+
                       "\nLastLogin:"+compareUsers.getLastLogin()
-              );
+              );*/
               //Dados de login
               editTextEmail.setText(sharedSettings.getString("dadosUsuario02",""));
               editTextPassword.setText(sharedSettings.getString("dadosUsuario03",""));

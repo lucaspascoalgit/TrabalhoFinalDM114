@@ -51,19 +51,9 @@
         android:layout_height="wrap_content"
         android:text="Logar" />
 
-    <TextView
-        android:id="@+id/textViewStatus"
+    <ListView
+        android:id="@+id/listViewClient"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Status login"
-        tools:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/textDadosCliente"
-        android:layout_width="match_parent"
-        android:layout_height="301dp"
-        android:text="Dados do Cliente"
-        tools:textColor="@color/wallet_link_text_light"
-        tools:textSize="1000sp" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

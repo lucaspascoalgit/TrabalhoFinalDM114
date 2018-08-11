@@ -38,8 +38,8 @@ public class OrderAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = activity.getLayoutInflater().inflate(
-                R.layout.order_list_item, null);
+            View view = activity.getLayoutInflater().inflate(
+                    R.layout.order_list_item, null);
 
         Order order = orders.get(position);
 

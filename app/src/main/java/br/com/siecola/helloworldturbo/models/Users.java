@@ -15,8 +15,9 @@ public class Users implements Serializable {
     private boolean enabled;
 
     public Users(){
-        this.email=" ";
+        this.email="Sem email";
         this.password=" ";
+        this.id=0;
     }
 
     public long getId() {
