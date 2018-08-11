@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_tela1"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Tela 1"/>
+        <item
+            android:id="@+id/nav_lista_pedidos"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Pedidos"/>
+
+        <item
+            android:id="@+id/nav_gcm"
+            android:icon="@drawable/ic_message_black_24dp"
+            android:title="GCM"/>
+
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Login"/>
+    </group>
+
+</menu>
