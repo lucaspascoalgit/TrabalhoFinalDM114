@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import br.com.siecola.helloworldturbo.fragments.Fragment_login;
 import br.com.siecola.helloworldturbo.fragments.GCMFragment;
 import br.com.siecola.helloworldturbo.fragments.OrdersFragment;
+import br.com.siecola.helloworldturbo.fragments.ProductsFragment;
 import br.com.siecola.helloworldturbo.fragments.SettingsFragment;
 import br.com.siecola.helloworldturbo.fragments.Tela1Fragment;
 import br.com.siecola.helloworldturbo.models.ProductInfo;
@@ -145,7 +146,7 @@ public class MainActivity extends AppCompatActivity
                     break;
                 case R.id.nav_settings:
                     //fragmentClass = SettingsFragment.class;
-                    fragmentClass = Fragment_login.class;
+                    fragmentClass = ProductsFragment.class;
                     fragment = (Fragment) fragmentClass.newInstance();
                     break;
                 default:

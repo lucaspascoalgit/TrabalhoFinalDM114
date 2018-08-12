@@ -3,9 +3,6 @@ package br.com.siecola.helloworldturbo.fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -46,9 +43,9 @@ public class OrderDetailFragment extends Fragment implements OrderEvents {
         getActivity().setTitle("Order Datails");
 
         txtId = rootView.findViewById(R.id.txtId);
-        txtEmail = rootView.findViewById(R.id.txtEmail);
-        txtFrete = rootView.findViewById(R.id.txtFrete);
-        txtQtd = rootView.findViewById(R.id.txtQtd);
+        txtEmail = rootView.findViewById(R.id.txtName);
+        txtFrete = rootView.findViewById(R.id.txtDescrip);
+        txtQtd = rootView.findViewById(R.id.txtCode);
         txtProdutos = rootView.findViewById(R.id.txtProdutos);
 
         if ((savedInstanceState != null) && (savedInstanceState.containsKey("pedido"))){

@@ -43,7 +43,7 @@
                 android:text="Email do Cliente:" />
 
             <TextView
-                android:id="@+id/txtEmail"
+                android:id="@+id/txtName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -60,7 +60,7 @@
                 android:text="Preço do Frete:" />
 
             <TextView
-                android:id="@+id/txtFrete"
+                android:id="@+id/txtDescrip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -77,7 +77,7 @@
                 android:text="Quantidade de Ites:" />
 
             <TextView
-                android:id="@+id/txtQtd"
+                android:id="@+id/txtCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"

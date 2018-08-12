@@ -1,10 +1,12 @@
 package br.com.siecola.helloworldturbo.models;
 
+import java.io.Serializable;
+
 /**
  * Created by paulosiecola on 14/04/18.
  */
 
-public class Product {
+public class Product implements Serializable {
 
     private long id;
     private String name;
