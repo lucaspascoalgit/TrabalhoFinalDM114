@@ -15,6 +15,7 @@ import java.util.List;
 
 import br.com.siecola.helloworldturbo.R;
 import br.com.siecola.helloworldturbo.models.Order;
+import br.com.siecola.helloworldturbo.models.OrderItem;
 import br.com.siecola.helloworldturbo.tasks.OrderEvents;
 import br.com.siecola.helloworldturbo.tasks.OrderTasks;
 import br.com.siecola.helloworldturbo.webservice.WebServiceResponse;
@@ -29,6 +30,7 @@ public class OrderDetailFragment extends Fragment implements OrderEvents {
     private TextView txtEmail;
     private TextView txtFrete;
     private TextView txtQtd;
+    private TextView txtProdutos;
 
     private Order order;
 
@@ -38,7 +40,7 @@ public class OrderDetailFragment extends Fragment implements OrderEvents {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_order_detail,
+        View rootView = inflater.inflate(R.layout.fragment_oder_detail01,
                 container, false);
 
         getActivity().setTitle("Order Datails");
@@ -47,6 +49,7 @@ public class OrderDetailFragment extends Fragment implements OrderEvents {
         txtEmail = rootView.findViewById(R.id.txtEmail);
         txtFrete = rootView.findViewById(R.id.txtFrete);
         txtQtd = rootView.findViewById(R.id.txtQtd);
+        txtProdutos = rootView.findViewById(R.id.txtProdutos);
 
         if ((savedInstanceState != null) && (savedInstanceState.containsKey("pedido"))){
                 this.order = (Order) savedInstanceState.getSerializable("pedido");
@@ -74,10 +77,20 @@ public class OrderDetailFragment extends Fragment implements OrderEvents {
     }
 
     private void showOrder(Order order){
+        List<OrderItem> listaProduto;
+        String exibeProdutos = "";
         txtId.setText(String.valueOf(order.getId()));
         txtEmail.setText(order.getEmail());
         txtFrete.setText(String.valueOf(order.getFreightPrice()));
         txtQtd.setText(String.valueOf(order.getOrderItems().size()));
+        //Mostrar pedidos*********************************************************
+        listaProduto = order.getOrderItems();
+        for (int i=0;i<order.getOrderItems().size();i++){
+            exibeProdutos +="Item"+String.valueOf(i+1)+":"+
+                     String.valueOf(listaProduto.get(i).getId()+"\n");
+        }
+        txtProdutos.setText(exibeProdutos);
+        //***********************************************************************
     }
 
     @Override
